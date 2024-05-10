@@ -4,7 +4,8 @@ const userSchema = new Schema(
     {
         email: { type: String },
         password: { type: String },
-        coin: { type: Number }
+        coin: { type: Number },
+        localPass:{type:String}
     },
     {
         versionKey: false,
