@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const bodyParser = require('body-parser');
 //mongo
 
 const mongoose = require('mongoose');
@@ -10,8 +11,13 @@ require('./models/user');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/user');
+var vnPayRouter = require('./routes/vnpay');
 
 var app = express();
+
+// >>>>>>>>>>>>>>>>>>>>>>
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -31,6 +37,7 @@ mongoose.connect('mongodb+srv://viu10112000:6GHKLTwFxtvZqZES@cluster0.8mthukx.mo
 
 app.use('/', indexRouter);
 app.use('/user', usersRouter);
+app.use('/vnpay', vnPayRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
