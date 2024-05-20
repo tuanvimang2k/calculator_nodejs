@@ -68,6 +68,7 @@ router.post('/create_payment_url', function (req, res, next) {
 });
 
 router.get('/vnpay_return', function (req, res, next) {
+    console.log("===================================== get vnpay_return");
     let vnp_Params = req.query;
 
     let secureHash = vnp_Params['vnp_SecureHash'];
@@ -89,10 +90,11 @@ router.get('/vnpay_return', function (req, res, next) {
 
     if (secureHash === signed) {
         //Kiem tra xem du lieu trong db co hop le hay khong va thong bao ket qua
-
+        console.log('>>>>>>>>>>>>>vnp_Params: thành công');
         res.render('success', { code: vnp_Params['vnp_ResponseCode'] })
     } else {
         res.render('success', { code: '97' })
+        console.log('>>>>>>>>>>>>>vnp_Params: thất bại' );
     }
 });
 
